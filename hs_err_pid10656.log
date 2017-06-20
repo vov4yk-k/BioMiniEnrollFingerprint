@@ -84,10 +84,10 @@ j  com.sun.jna.Function.invoke([Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/O
 j  com.sun.jna.Function.invoke(Ljava/lang/Class;[Ljava/lang/Object;Ljava/util/Map;)Ljava/lang/Object;+194
 j  com.sun.jna.Library$Handler.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;+344
 j  com.sun.proxy.$Proxy0.UFS_GetCaptureImageBuffer(Lcom/sun/jna/Pointer;[B)I+20
-j  ')h±Ж‹6.getImg(Lcom/sun/jna/Pointer;)V+110
-j  ')h±Ж‹6.drawCurrentFingerImage()V+86
-j  ')h±Ж‹6.captureSingle()I+146
-j  ')h±Ж‹6.main([Ljava/lang/String;)V+56
+j  ')hпїЅЖ‹6.getImg(Lcom/sun/jna/Pointer;)V+110
+j  ')hпїЅЖ‹6.drawCurrentFingerImage()V+86
+j  ')hпїЅЖ‹6.captureSingle()I+146
+j  ')hпїЅЖ‹6.main([Ljava/lang/String;)V+56
 v  ~StubRoutines::call_stub
 
 ---------------  P R O C E S S  ---------------
@@ -228,14 +228,14 @@ Dynamic libraries:
 0x00007ff99d8e0000 - 0x00007ff99d8f6000 	C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL
 0x00007ff99d8c0000 - 0x00007ff99d8da000 	C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL
 0x0000000056eb0000 - 0x0000000056ec1000 	C:\Program Files\Java\jdk1.8.0_111\jre\bin\nio.dll
-0x0000000180000000 - 0x0000000180031000 	C:\Users\Користувач\AppData\Local\Temp\jna1611857280027426171.tmp
-0x0000000017d90000 - 0x0000000017f4a000 	C:\Users\Користувач\Desktop\biost\Нова папка\BioMiniEnrollFingerprint\UFScanner.dll
+0x0000000180000000 - 0x0000000180031000 	C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\AppData\Local\Temp\jna1611857280027426171.tmp
+0x0000000017d90000 - 0x0000000017f4a000 	C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\Desktop\biost\пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\BioMiniEnrollFingerprint\UFScanner.dll
 0x00007ff9a8250000 - 0x00007ff9a8679000 	C:\WINDOWS\System32\SETUPAPI.dll
 0x00007ff9a6190000 - 0x00007ff9a62c8000 	C:\WINDOWS\System32\ole32.dll
 0x00007ff9a6820000 - 0x00007ff9a68df000 	C:\WINDOWS\System32\OLEAUT32.dll
 0x00007ff9a60d0000 - 0x00007ff9a616c000 	C:\WINDOWS\System32\msvcp_win.dll
 0x00007ff99eb00000 - 0x00007ff99eb86000 	C:\WINDOWS\SYSTEM32\WINSPOOL.DRV
-0x0000000017cb0000 - 0x0000000017d30000 	C:\Users\Користувач\Desktop\biost\Нова папка\BioMiniEnrollFingerprint\UFMatcher.dll
+0x0000000017cb0000 - 0x0000000017d30000 	C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\Desktop\biost\пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\BioMiniEnrollFingerprint\UFMatcher.dll
 0x00007ff9a3b30000 - 0x00007ff9a3b58000 	C:\WINDOWS\System32\DEVOBJ.dll
 0x00007ff9a50f0000 - 0x00007ff9a5145000 	C:\WINDOWS\System32\WINTRUST.dll
 0x00007ff9a5090000 - 0x00007ff9a50a0000 	C:\WINDOWS\System32\MSASN1.dll
@@ -247,13 +247,13 @@ Dynamic libraries:
 
 VM Arguments:
 jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:58214,suspend=y,server=n -Dfile.encoding=UTF-8 
-java_command: BioMiniSDK
-java_class_path (initial): C:\Program Files\Java\jdk1.8.0_111\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\rt.jar;C:\Users\Користувач\Desktop\biost\Нова папка\BioMiniEnrollFingerprint\target\classes;C:\Users\Користувач\.m2\repository\com\sun\jna\jna\3.0.9\jna-3.0.9.jar;C:\Users\Користувач\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.3.2\lib\idea_rt.jar
+java_command: controllers.BioMiniSDK
+java_class_path (initial): C:\Program Files\Java\jdk1.8.0_111\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_111\jre\lib\rt.jar;C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\Desktop\biost\пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\BioMiniEnrollFingerprint\target\classes;C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\.m2\repository\com\sun\jna\jna\3.0.9\jna-3.0.9.jar;C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.3.2\lib\idea_rt.jar
 Launcher Type: SUN_STANDARD
 
 Environment Variables:
-PATH=C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Users\Користувач\AppData\Local\Microsoft\WindowsApps;
-USERNAME=Користувач
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Users\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\AppData\Local\Microsoft\WindowsApps;
+USERNAME=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 76 Stepping 3, GenuineIntel
 
