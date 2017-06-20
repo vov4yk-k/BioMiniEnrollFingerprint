@@ -6,6 +6,7 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 import com.suprema.UFE33.UFMatcherClass;
 import com.suprema.UFE33.UFScannerClass;
 import org.apache.commons.codec.binary.Base64;
+import sun.misc.IOUtils;
 //import org.apache.commons.codec.binary.Base64;
 
 import javax.imageio.ImageIO;
@@ -39,6 +40,9 @@ public class BioMiniSDK {
     private  PointerByReference refTemplateArray = null;
 
     public int nC=0;
+
+    public final int MAX_IMAGE_WIDTH = 640;
+    public final int MAX_IMAGE_HEIGHT = 640;
 
     UFScannerClass.UFS_SCANNER_PROC pScanProc  = new UFScannerClass.UFS_SCANNER_PROC()
     {
@@ -301,13 +305,6 @@ public class BioMiniSDK {
             }
         }
 
-        /*nSelectedIdx = jList1_scanner_list.getSelectedIndex();
-        if (nSelectedIdx == -1) {
-            nSelectedIdx = 0;
-        }
-
-        jList1_scanner_list.setSelectedIndex(nSelectedIdx);
-        jList1_scanner_list.ensureIndexIsVisible(nSelectedIdx);*/
     }
 
     public void initVariable(int nFlag) {
@@ -526,6 +523,9 @@ public class BioMiniSDK {
             return -1;
         }
 
+        // Clear capture buffer
+        libScanner.UFS_ClearCaptureImageBuffer(hScanner);
+
         System.out.println("Start single image capturing");
 
         nRes = libScanner.UFS_CaptureSingleImage(hScanner);
@@ -555,48 +555,53 @@ public class BioMiniSDK {
     }
 
     public void drawCurrentFingerImage() {
-		/*test draw image*/
-        IntByReference refResolution = new IntByReference();
-        IntByReference refHeight     = new IntByReference();
-        IntByReference refWidth      = new IntByReference();
-        Pointer hScanner =null;
-
-        hScanner = getCurrentScannerHandle();
-
-        libScanner.UFS_GetCaptureImageBufferInfo(hScanner, refWidth, refHeight, refResolution);
-
-        byte[] pImageData = new byte[refWidth.getValue()*refHeight.getValue()];
-
-        libScanner.UFS_GetCaptureImageBuffer(hScanner,pImageData);
-
-        //imgPanel.drawFingerImage(refWidth.getValue(),refHeight.getValue(),pImageData);
-        System.out.println(pImageData);
-       // String encoded = Base64.encodeBase64String(pImageData);
-        //System.out.println(encoded);
-        getImg(hScanner);
+       String img = getImgBase64();
+       System.out.println(img);
     }
 
-   public void getImg(Pointer hScanner){
+   public void saveImg(String path){
 
        byte[] bTemplate = new byte[512];
        PointerByReference refError;
        IntByReference refTemplateSize = new IntByReference();
-
        IntByReference refTemplateQuality = new IntByReference();
-
        IntByReference refVerify = new IntByReference();
+       Pointer hScanner = getCurrentScannerHandle();
 
        int nRes = libScanner.UFS_Extract(hScanner,bTemplate,refTemplateSize,refTemplateQuality);
-       System.out.println("quality: "+refTemplateQuality.getValue());
 
-       String path = "D:/xx.bmp";
        libScanner.UFS_SaveCaptureImageBufferToBMP(hScanner,path);
 
-       byte[] img = new byte[512];
-       libScanner.UFS_GetCaptureImageBuffer(hScanner,img);
+   }
 
-       String encoded = Base64.encodeBase64String(img);
-        System.out.println(encoded);
-       
+   public String getImgBase64(){
+
+       IntByReference refResolution = new IntByReference();
+       IntByReference refHeight     = new IntByReference();
+       IntByReference refWidth      = new IntByReference();
+       Pointer hScanner = getCurrentScannerHandle();
+       String encodedImg = null;
+
+       int nRes = libScanner.UFS_GetCaptureImageBufferInfo(hScanner, refWidth, refHeight, refResolution);
+
+       byte[] pImageData = new byte[refWidth.getValue()*refHeight.getValue()];
+
+       libScanner.UFS_GetCaptureImageBuffer(hScanner,pImageData);
+
+       BufferedImage buffImage = new BufferedImage(refWidth.getValue(), refHeight.getValue(), BufferedImage.TYPE_BYTE_GRAY);
+       buffImage.getRaster().setDataElements(0, 0, refWidth.getValue(), refWidth.getValue(), pImageData);
+
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+       try {
+           ImageIO.write(buffImage, "bmp", baos);
+           baos.flush();
+           byte[] imageInByte = baos.toByteArray();
+           baos.close();
+           encodedImg = Base64.encodeBase64String(imageInByte);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+       return encodedImg;
    }
 }
