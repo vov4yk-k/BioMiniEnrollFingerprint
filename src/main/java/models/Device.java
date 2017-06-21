@@ -4,6 +4,7 @@ package models;
 /**
  * Created by Користувач on 20.06.2017.
  */
+
 public class Device {
 
     private int id;
@@ -31,6 +32,10 @@ public class Device {
         this.id = id;
 
         this.model = model;
+    }
+
+    public Device() {
+
     }
 
     public String getModel() {

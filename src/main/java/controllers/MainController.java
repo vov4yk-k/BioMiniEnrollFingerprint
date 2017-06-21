@@ -2,6 +2,10 @@ package controllers;
 
 import models.Device;
 import models.FingerprintTemplate;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashSet;
 
@@ -14,5 +18,7 @@ public interface MainController {
 
     String saveImage();
 
-    public HashSet<Device> deviceList();
+    HashSet<Device> deviceList();
+
+    void changeDevice(Device device);
 }

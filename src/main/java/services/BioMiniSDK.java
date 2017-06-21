@@ -1,4 +1,4 @@
-package controllers;
+package services;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -8,11 +8,13 @@ import com.suprema.UFE33.UFMatcherClass;
 import com.suprema.UFE33.UFScannerClass;
 import models.Device;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ import java.util.logging.SimpleFormatter;
 /**
  * Created by Користувач on 19.06.2017.
  */
+@Service
 public class BioMiniSDK {
 
     private int nInitFlag;
@@ -45,7 +48,7 @@ public class BioMiniSDK {
 
     public int nC = 0;
 
-    private HashSet<Device> devices;
+    private HashMap<String,Device> devices;
     private Device currentDevice;
     private Logger logger;
     private FileHandler fh;
@@ -71,7 +74,7 @@ public class BioMiniSDK {
     BioMiniSDK() {
         listModel = new DefaultListModel();
         listLogModel = new DefaultListModel();
-        devices = new HashSet<>();
+        devices = new HashMap<>();
         initLoger();
         init();
     }
@@ -500,7 +503,7 @@ public class BioMiniSDK {
         return encodedImg;
     }
 
-    public HashSet<Device> getListModel() {
+    public HashMap<String,Device> getListModel() {
         return devices;
     }
 
@@ -511,15 +514,18 @@ public class BioMiniSDK {
         libScanner.UFS_GetScannerID(hScanner, bScannerId);
         String scanerName = Native.toString(bScannerId);
 
+        if(devices.get(scanerName) != null) return;
+
         Device device = new Device(id, scanerName);
 
-        devices.add(device);
+        devices.put(scanerName,device);
 
-        this.currentDevice = device;
+        if(this.currentDevice == null) this.currentDevice = device;
 
     }
 
     public void setCurrentDevice(Device device){
+        this.devices.put(device.getModel(),device);
         this.currentDevice = device;
         initVariable(1);
     }

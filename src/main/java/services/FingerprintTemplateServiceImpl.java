@@ -1,12 +1,15 @@
 package services;
 
-import controllers.BioMiniSDK;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Користувач on 20.06.2017.
  */
+@Service
 public class FingerprintTemplateServiceImpl implements FingerprintTemplateService {
 
+    @Autowired
     BioMiniSDK bioMiniSDK;
 
     public FingerprintTemplateServiceImpl(BioMiniSDK bioMiniSDK) {

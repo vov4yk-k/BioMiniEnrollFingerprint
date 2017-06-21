@@ -2,8 +2,9 @@ package controllers;
 
 import models.Device;
 import models.FingerprintTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import services.DeviceService;
 import services.DeviceServiceImpl;
 import services.FingerprintTemplateService;
@@ -20,10 +21,10 @@ public class MainRestController implements MainController {
     DeviceService deviceService;
     FingerprintTemplateService fingerprintTemplateService;
 
-    public MainRestController() {
-        BioMiniSDK bioMiniSDK = new BioMiniSDK();
-        this.deviceService = new DeviceServiceImpl(bioMiniSDK);
-        this.fingerprintTemplateService = new FingerprintTemplateServiceImpl(bioMiniSDK);
+    @Autowired
+    public MainRestController(DeviceService deviceService, FingerprintTemplateService fingerprintTemplateService) {
+        this.deviceService = deviceService;
+        this.fingerprintTemplateService = fingerprintTemplateService;
     }
 
     @Override
@@ -45,4 +46,10 @@ public class MainRestController implements MainController {
         return deviceService.deviceList();
     }
 
+    @Override
+    @RequestMapping(value = "/changeDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public void changeDevice(@RequestBody Device device){
+        deviceService.changeDevice(device);
+    }
 }
