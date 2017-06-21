@@ -6,11 +6,14 @@ package models;
 public class FingerprintTemplate {
 
     String template;
-    String message;
+    Messages message;
 
-    public FingerprintTemplate(String template, String message) {
+    public FingerprintTemplate(String template, Messages message) {
         this.template = template;
         this.message = message;
+    }
+
+    public FingerprintTemplate() {
     }
 
     public String getTemplate() {
@@ -21,11 +24,12 @@ public class FingerprintTemplate {
         this.template = template;
     }
 
-    public String getMessage() {
+    public Messages getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Messages message) {
+        if(this.message != null) return;
         this.message = message;
     }
 }

@@ -3,12 +3,9 @@ package controllers;
 import models.Device;
 import models.FingerprintTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import services.DeviceService;
-import services.DeviceServiceImpl;
 import services.FingerprintTemplateService;
-import services.FingerprintTemplateServiceImpl;
 
 import java.util.HashSet;
 
@@ -30,14 +27,14 @@ public class MainRestController implements MainController {
     @Override
     @RequestMapping("/getTemplate")
     public FingerprintTemplate getTemplate() {
-        fingerprintTemplateService.captureSingle();
-        fingerprintTemplateService.getImmage();
-        return new FingerprintTemplate(fingerprintTemplateService.getImmage(),"Done!");
+        return fingerprintTemplateService.captureAndGetTemplate();
     }
 
     @Override
-    public String saveImage() {
-        return null;
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public void saveImage(@RequestBody String path) {
+        fingerprintTemplateService.saveImage(path);
     }
 
     @Override

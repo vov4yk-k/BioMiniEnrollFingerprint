@@ -1,13 +1,17 @@
 package services;
 
+import models.FingerprintTemplate;
+
 /**
  * Created by Користувач on 20.06.2017.
  */
 public interface FingerprintTemplateService {
 
-    String getImmage();
+    String getImage();
 
-    void saveImmage(String path);
+    void saveImage(String path);
 
     int captureSingle();
+
+    FingerprintTemplate captureAndGetTemplate();
 }

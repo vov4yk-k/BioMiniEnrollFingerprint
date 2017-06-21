@@ -59,11 +59,13 @@ public class BioMiniSDK {
         {
             nC++;
 
-            System.out.println(nC + "==========================================");  //
-            System.out.println("==>ScanProc calle scannerID:" + szScannerId);  //
-            System.out.println("sensoron value is " + bSensorOn);
-            System.out.println("void * pParam  value is " + pParam.getValue());
-            System.out.println(nC + "==========================================");  //
+            logger.info(nC + "==========================================");  //
+            logger.info("==>ScanProc calle scannerID:" + szScannerId);  //
+            logger.info("sensoron value is " + bSensorOn);
+            logger.info("void * pParam  value is " + pParam.getValue());
+            logger.info(nC + "==========================================");  //
+
+            if(bSensorOn == 0) devices.clear();
 
             updateScannerList();
 
@@ -402,21 +404,21 @@ public class BioMiniSDK {
         int nRes = 0;
         Pointer hScanner = null;
 
-        System.out.println("call GetCurrentScannerHandle()");
+        logger.info("call GetCurrentScannerHandle()");
 
         hScanner = getCurrentScannerHandle();
 
         if (hScanner != null) {
 
-            System.out.println("GetScannerHandle return hScanner pointer: " + hScanner);
+            logger.info("GetScannerHandle return hScanner pointer: " + hScanner);
 
-            System.out.println("get Scanner handle success pointer:" + hScanner);
+            logger.info("get Scanner handle success pointer:" + hScanner);
 
         } else {
 
-            System.out.println("GetScannerHandle fail!!");
+            logger.info("GetScannerHandle fail!!");
 
-            System.out.println("get Scanner handle fail!!");
+            logger.info("get Scanner handle fail!!");
 
             return -1;
         }
@@ -424,12 +426,12 @@ public class BioMiniSDK {
         // Clear capture buffer
         libScanner.UFS_ClearCaptureImageBuffer(hScanner);
 
-        System.out.println("Start single image capturing");
+        logger.info("Start single image capturing");
 
         nRes = libScanner.UFS_CaptureSingleImage(hScanner);
 
         if (nRes == 0) {
-            System.out.println("==>UFS_CaptureSingleImage return value is.." + nRes);
+            logger.info("==>UFS_CaptureSingleImage return value is.." + nRes);
 
             nCaptureFlag = 1;
 
@@ -437,16 +439,17 @@ public class BioMiniSDK {
 
         } else {
 
-            System.out.println("SingleImage fail!! code:" + nRes);
+            logger.info("SingleImage fail!! code:" + nRes);
 
             byte[] refErr = new byte[512];
 
-            nRes = libScanner.UFS_GetErrorString(nRes, refErr);
-            if (nRes == 0) {
-                System.out.println("==>UFS_GetErrorString err is " + Native.toString(refErr));
+            int nResErr = libScanner.UFS_GetErrorString(nRes, refErr);
+            if (nResErr == 0) {
+                logger.info("==>UFS_GetErrorString err is " + Native.toString(refErr));
             }
 
-            System.out.println("caputure single img fail!!");
+            logger.info("caputure single img fail!!");
+
         }
 
         return nRes;
@@ -482,6 +485,8 @@ public class BioMiniSDK {
 
         int nRes = libScanner.UFS_GetCaptureImageBufferInfo(hScanner, refWidth, refHeight, refResolution);
 
+        if(nRes != 0) return null;
+
         byte[] pImageData = new byte[refWidth.getValue() * refHeight.getValue()];
 
         libScanner.UFS_GetCaptureImageBuffer(hScanner, pImageData);
@@ -497,7 +502,7 @@ public class BioMiniSDK {
             baos.close();
             encodedImg = Base64.encodeBase64String(imageInByte);
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
 
         return encodedImg;

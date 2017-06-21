@@ -16,7 +16,7 @@ public interface MainController {
 
     FingerprintTemplate getTemplate();
 
-    String saveImage();
+    void saveImage(String path);
 
     HashSet<Device> deviceList();
 
