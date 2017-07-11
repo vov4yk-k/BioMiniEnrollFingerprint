@@ -1,11 +1,9 @@
 package controllers;
 
 import models.Device;
-import models.FingerprintTemplate;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import models.UserTemplate;
+import models.biostarAPI.*;
+
 
 import java.util.HashSet;
 
@@ -14,11 +12,22 @@ import java.util.HashSet;
  */
 public interface MainController {
 
-    FingerprintTemplate getTemplate();
+    UserTemplate getTemplate();
 
     void saveImage(String path);
 
     HashSet<Device> deviceList();
 
     void changeDevice(Device device);
+
+    LoggedInUser authBiostar2Srv(UserLoginRequestData userLoginRequestData);
+
+    VerifyFingerprintResult verifyFingerprint();
+
+    UpdateResponse updateUserFingerprint(long user_id);
+
+    AddResponse createNewUser(CreateUser createUser);
+
+    String scanFingerprint();
+
 }

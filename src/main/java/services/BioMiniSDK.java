@@ -14,8 +14,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -54,9 +54,7 @@ public class BioMiniSDK {
     private FileHandler fh;
 
     UFScannerClass.UFS_SCANNER_PROC pScanProc = new UFScannerClass.UFS_SCANNER_PROC() {
-        public int callback(String szScannerId, int bSensorOn, PointerByReference pParam) //interface ..must be implemeent
-
-        {
+        public int callback(String szScannerId, int bSensorOn, PointerByReference pParam){ //interface ..must be implemeent//
             nC++;
 
             logger.info(nC + "==========================================");  //
@@ -508,6 +506,47 @@ public class BioMiniSDK {
         return encodedImg;
     }
 
+    public String getTemplateBase64(){
+
+        Pointer hScanner = null;
+        hScanner = getCurrentScannerHandle();
+
+        byte[] bTemplate = new byte[512];
+        PointerByReference refError;
+        IntByReference refTemplateSize = new IntByReference();
+
+        IntByReference refTemplateQuality = new IntByReference();
+
+        IntByReference refVerify = new IntByReference();
+
+        int nRes = libScanner.UFS_Extract(hScanner,bTemplate,refTemplateSize,refTemplateQuality);
+
+        byte[] newBTemplate = Arrays.copyOf(bTemplate,refTemplateSize.getValue());
+
+        //return Base64.encodeBase64String(encryptTemplate(newBTemplate));
+        System.out.println(refTemplateQuality.getValue());
+        return Base64.encodeBase64String(newBTemplate);
+
+    }
+
+    public byte[] encryptTemplate(byte[] templateInput){
+
+        int ufs_res;
+        Pointer hScanner;
+        byte[] templateOutput = new byte[MAX_TEMPLATE_SIZE];
+        int templateInputSize = templateInput.length;
+        IntByReference templateOutputSize = new IntByReference();
+        templateOutputSize.setValue(MAX_TEMPLATE_SIZE);
+
+        hScanner = getCurrentScannerHandle();
+
+        ufs_res = libScanner.UFS_EncryptTemplate(hScanner, templateInput,
+                templateInputSize, templateOutput, templateOutputSize);
+
+        return Arrays.copyOf(templateOutput,templateOutputSize.getValue());
+
+    }
+
     public HashMap<String,Device> getListModel() {
         return devices;
     }
@@ -533,23 +572,6 @@ public class BioMiniSDK {
         this.devices.put(device.getModel(),device);
         this.currentDevice = device;
         initVariable(1);
-    }
-
-    public void test(){
-        int ufs_res;
-        Pointer hScanner = getCurrentScannerHandle();
-        IntByReference bFingerOn = new IntByReference();
-
-        while (true) {
-            ufs_res = libScanner.UFS_IsFingerOn(hScanner, bFingerOn);
-            if (bFingerOn.getValue() == 0) {
-                System.out.println("finger is not placed");
-            } else {
-                System.out.println("placed");
-                captureSingle();
-                String dd = getImgBase64();
-            }
-        }
     }
 
 

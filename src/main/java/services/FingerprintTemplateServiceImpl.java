@@ -1,6 +1,6 @@
 package services;
 
-import models.FingerprintTemplate;
+import models.UserTemplate;
 import models.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class FingerprintTemplateServiceImpl implements FingerprintTemplateServic
 
     @Override
     public String getImage() {
-        return bioMiniSDK.getImgBase64();
+        return bioMiniSDK.getTemplateBase64();
     }
 
     @Override
@@ -34,29 +34,28 @@ public class FingerprintTemplateServiceImpl implements FingerprintTemplateServic
     }
 
     @Override
-    public FingerprintTemplate captureAndGetTemplate() {
+    public UserTemplate captureAndGetTemplate() {
 
         String img = null;
         int res = 0;
         boolean fail = false;
-        FingerprintTemplate fingerprintTemplate = new FingerprintTemplate();
+        UserTemplate userTemplate = new UserTemplate();
 
         res = captureSingle();
-        fingerprintTemplate.setMessage(Messages.getMessage(res));
+        userTemplate.setMessage(Messages.getMessage(res));
 
         fail = res != 0;
 
         img = getImage();
         if (img != null && !fail){
-            fingerprintTemplate.setTemplate(img);
-            fingerprintTemplate.setMessage(Messages.Success);
+            userTemplate.setTemplate(img);
+            userTemplate.setMessage(Messages.Success);
         }else{
-            fingerprintTemplate.setMessage(Messages.GetImageFail);
+            userTemplate.setMessage(Messages.GetImageFail);
         }
 
-        return fingerprintTemplate;
+        return userTemplate;
 
     }
-
 
 }

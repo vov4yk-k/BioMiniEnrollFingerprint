@@ -14,7 +14,7 @@ public class Device {
     private int sensivity = 4;
     private int templateType = 2001;
     private int detectFake = 2;
-    private int enrollQuality = 50;
+    private int enrollQuality = 80;
 
 
     public Device(int id, String model, int timeOut, int brightness, int sensivity, int templateType, int detectFake, int enrollQuality) {

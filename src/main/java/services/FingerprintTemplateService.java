@@ -1,6 +1,6 @@
 package services;
 
-import models.FingerprintTemplate;
+import models.UserTemplate;
 
 /**
  * Created by Користувач on 20.06.2017.
@@ -13,5 +13,5 @@ public interface FingerprintTemplateService {
 
     int captureSingle();
 
-    FingerprintTemplate captureAndGetTemplate();
+    UserTemplate captureAndGetTemplate();
 }

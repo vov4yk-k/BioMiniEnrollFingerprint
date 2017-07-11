@@ -1,7 +1,6 @@
 package models;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Created by Користувач on 21.06.2017.
@@ -26,6 +25,7 @@ public enum Messages {
 
 
     public static Messages getMessage(int code){
+        if(code==0) return null;
         return Arrays.stream(values())
                 .filter(e->e.getCode()==code)
                 .findFirst()
